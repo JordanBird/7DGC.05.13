@@ -86,6 +86,10 @@ public class sideScroll : MonoBehaviour {
 			checkDirectionIndex();
 		}
 		lastDirectionIndex = directionIndex;
+		if(Input.GetKey(KeyCode.Mouse2))
+		{
+			hitEdge = false;
+		}
 				
 	}
 	
