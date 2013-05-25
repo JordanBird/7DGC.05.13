@@ -5,7 +5,6 @@ public class cameraOrbit : MonoBehaviour {
 	
 	float mouseXPos;
 	float rotateSpeed;
-	public float rotSpeed;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,8 +14,6 @@ public class cameraOrbit : MonoBehaviour {
 	void Update () {
 		mouseXPos = Input.mousePosition.x;
 		rotateSpeed = setRotSpeed();
-		Debug.Log(rotateSpeed);
-		Debug.Log(-rotateSpeed);
 		//rotateSpeed = mouseXPos * rotSpeed * 0.02f; 
 	if (Input.GetKey(KeyCode.Mouse2))
 		{
