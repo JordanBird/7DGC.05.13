@@ -17,6 +17,7 @@ Medium
 - Fog of War
 - Loss Conditions
 - Buildings
+- Control Points
 Low
 - Win Conditions
 - Music/Sound
@@ -32,6 +33,7 @@ Individual Working On
 Ash
 - Camera
 - Minimap
+- Control Points
 Jordan
 - AI
 - Units
