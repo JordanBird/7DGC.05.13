@@ -299,4 +299,15 @@ public class cscript_unit : MonoBehaviour {
 	{
 		target = v;
 	}
+	
+	void OnCollisionEnter(Collision collision)
+	{
+		if (collision.collider.gameObject.tag == "Cigar Crate")
+		{
+			maxHealth += 10;
+		
+			currentHealth = maxHealth;
+			Destroy(collision.collider.gameObject);	
+		}
+	}
 }

@@ -8,6 +8,9 @@ public class cscript_player : MonoBehaviour {
 	public int electricity = 0;
 	
 	public List<cscript_unit> units = new List<cscript_unit>();
+	public List<GameObject> units2 = new List<GameObject>();
+	
+	public GameObject testUnit;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,7 +19,11 @@ public class cscript_player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Random.Range (0, 200) == 5)
+		{
+			GameObject newUnit = Instantiate (testUnit, new Vector3(200, 1, 200), Quaternion.identity) as GameObject;
+			units2.Add (newUnit);	
+		}
 	}
 	
 	public void AddSteam(int s)
