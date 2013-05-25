@@ -31,18 +31,18 @@ Low
 Individual Working On
 ------------------
 Ash
-- Camera - In Progress 80%
-- Minimap - In Progress 50%
+- Camera - 		In Progress 	80%
+- Minimap - 		In Progress 	50%
 Jordan
-- AI
-- Units
-- Resources
-- Resource Holding
-- Unit Selection
-- Unit Control
-- Control Points
+- AI - 			In Progress 	0%
+- Units - 		In Progress 	10%
+- Resources - 		In Progress 	90%
+- Resource Holding - 	Completed 	100%
+- Unit Selection - 	In Progress 	50%
+- Unit Control - 	Completed 	100%
+- Control Points - 	Completed 	100%
 Rob
-- Level Design
+- Level Design - 	In Progress 	10%
 Pete
 - Modeling
 -- Cigar Crates

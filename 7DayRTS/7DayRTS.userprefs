@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Jordans Stuff\cscript_mini_map.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Jordans Stuff\cscript_unit.cs">
     <Files>
-      <File FileName="Assets\Jordans Stuff\cscript_unit.cs" Line="313" Column="1" />
-      <File FileName="Assets\Jordans Stuff\cscript_death_zone.cs" Line="16" Column="22" />
-      <File FileName="Assets\Jordans Stuff\cscript_point.cs" Line="76" Column="39" />
-      <File FileName="Assets\Jordans Stuff\cscript_mini_map.cs" Line="16" Column="52" />
+      <File FileName="Assets\Jordans Stuff\cscript_death_zone.cs" Line="16" Column="2" />
+      <File FileName="Assets\Jordans Stuff\cscript_point.cs" Line="33" Column="69" />
+      <File FileName="Assets\Jordans Stuff\cscript_unit.cs" Line="297" Column="6" />
+      <File FileName="Assets\Sources\LightningBolt.cs" Line="76" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

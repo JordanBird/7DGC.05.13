@@ -55,6 +55,7 @@
      <Compile Include="Assets\Jordans Stuff\cscript_player.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_point.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_unit.cs" />
+     <Compile Include="Assets\Sources\LightningBolt.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />

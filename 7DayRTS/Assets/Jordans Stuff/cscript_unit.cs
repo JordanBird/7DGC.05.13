@@ -23,6 +23,8 @@ public class cscript_unit : MonoBehaviour {
 	public Vector3 target = new Vector3(300, 0, 300);
 	bool canReachTarget = false;
 	
+	public int range = 10;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -78,72 +80,7 @@ public class cscript_unit : MonoBehaviour {
 			}
 		}
 		
-//		switch (currentDirection)
-//		{
-//		case 0:
-//			if(Physics.Raycast(transform.position, new Vector3(0.1f, 0, 0), 0.1f) == false)
-//			{
-//				transform.position = new Vector3(transform.position.x + 0.1f, transform.position.y, transform.position.z);
-//				Debug.DrawRay(transform.position, new Vector3(1, 0, 0), Color.green);
-//				
-//				if (MoveDesiredDirection () == true)
-//					currentDirection = desiredDirection;
-//				
-//				if (CheckTarget () == true)
-//					Debug.Log ("True");
-//			}
-//			else
-//			{
-//				desiredDirection = 0;
-//				currentDirection = 2;
-//			}
-//			break;
-//		case 1:
-//			if(Physics.Raycast(transform.position, new Vector3(-0.1f, 0, 0), 0.1f) == false)
-//			{
-//				transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
-//				Debug.DrawRay(transform.position, new Vector3(-1, 0, 0), Color.green);
-//				
-//				if (MoveDesiredDirection () == true)
-//					currentDirection = desiredDirection;
-//			}
-//			else
-//			{
-//				desiredDirection = 1;
-//				currentDirection = 3;
-//			}
-//			break;
-//		case 2:
-//			if(Physics.Raycast(transform.position, new Vector3(0, 0, 0.1f), 0.1f) == false)
-//			{
-//				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.1f);
-//				Debug.DrawRay(transform.position, new Vector3(0, 0, 1), Color.green);
-//				
-//				if (MoveDesiredDirection () == true)
-//					currentDirection = desiredDirection;
-//			}
-//			else
-//			{
-//				desiredDirection = 2;
-//				currentDirection = 0;
-//			}
-//			break;
-//		case 3:
-//			if(Physics.Raycast(transform.position, new Vector3(0, 0, -0.1f), 0.1f) == false)
-//			{
-//				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.1f);
-//				Debug.DrawRay(transform.position, new Vector3(0, 0, -1), Color.green);
-//				
-//				if (MoveDesiredDirection () == true)
-//					currentDirection = desiredDirection;
-//			}
-//			else
-//			{
-//				desiredDirection = 3;
-//				currentDirection = 1;
-//			}
-//			break;
-//		}
+		//CheckForUnits ();
 	}
 	
 	public bool CheckDesiredDirection()
@@ -322,5 +259,47 @@ public class cscript_unit : MonoBehaviour {
 	public cscript_player GetOwnedPlayer()
 	{
 		return ownedPlayer.GetComponent<cscript_player>();
+	}
+//	
+//	public void CheckForUnits()
+//	{
+//		bool shot = false;
+//		
+//		Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+//		
+//		foreach (Collider c in hitColliders)
+//		{
+//			Debug.Log (c.gameObject.tag);
+////			if (c.gameObject.tag == "Enemy Test")
+////			{
+////				Debug.Log ("Shoot");
+////				gameObject.GetComponent<LightningBolt>().SetOn ();
+////				gameObject.GetComponent<LightningBolt>().target = c.transform;
+////				
+////				shot = true;
+////			}
+//		}
+//		
+//		//if (shot == false)
+//			//gameObject.GetComponent<LightningBolt>().SetOff();
+//	}
+	
+	void OnTriggerStay(Collider collider)
+	{
+		if (collider.gameObject.tag == "Unit")
+		{
+			//if (ownedPlayer != collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
+			//{
+				//Debug.Log ("Shoot");
+			
+				//gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				//gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+			//}
+		}
+	}
+	
+	void OnTriggerExit(Collider collider)
+	{
+		gameObject.GetComponentInChildren<LightningBolt>().SetOff();
 	}
 }
