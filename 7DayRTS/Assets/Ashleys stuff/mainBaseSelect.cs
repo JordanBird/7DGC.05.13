@@ -21,4 +21,13 @@ public class mainBaseSelect : MonoBehaviour {
 	{
 		selected = true;
 	}
+	
+	void OnGUI()
+	{
+		GUI.depth = 1;
+		if (selected == true)
+		{
+			GUI.Button(new Rect(400, Screen.height - 150,150,50), "Spawn Unit");
+		}
+	}
 }
