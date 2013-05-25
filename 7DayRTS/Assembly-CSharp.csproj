@@ -49,7 +49,9 @@
      <Compile Include="Assets\Ashleys stuff\miniMap\miniMap.cs" />
      <Compile Include="Assets\Ashleys stuff\sideScroll.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_cigar_crate.cs" />
+     <Compile Include="Assets\Jordans Stuff\cscript_death_zone.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_master.cs" />
+     <Compile Include="Assets\Jordans Stuff\cscript_mini_map.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_player.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_point.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_unit.cs" />

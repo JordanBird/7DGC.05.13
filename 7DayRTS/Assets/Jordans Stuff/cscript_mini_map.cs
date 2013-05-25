@@ -13,6 +13,6 @@ public class cscript_mini_map : MonoBehaviour {
 	{
 		transform.position = new Vector3(cameraTarget.position.x, transform.position.y, cameraTarget.position.z);
 
-		camera.pixelRect = new Rect(Screen.width - width, Screen.height - height, width, height);
+		camera.pixelRect = new Rect(0, 0, width, height);
 	}
 }
