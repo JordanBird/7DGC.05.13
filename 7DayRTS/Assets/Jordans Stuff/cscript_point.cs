@@ -75,7 +75,6 @@ public class cscript_point : MonoBehaviour {
 		
 		foreach (Collider c in hitColliders)
 		{
-			Debug.Log (c.tag);
 			if (c.tag == "Unit")
 			{
 				return true;

@@ -311,6 +311,14 @@ public class cscript_unit : MonoBehaviour {
 		}
 	}
 	
+	void onTriggerEnter(Collision collision)
+	{
+		if (collision.collider.tag == "Death Zone")
+		{
+			Debug.Log ("Boom");
+		}
+	}
+	
 	public cscript_player GetOwnedPlayer()
 	{
 		return ownedPlayer.GetComponent<cscript_player>();
