@@ -1,16 +1,49 @@
-Menus
-AI
-Units
-Spawning
-Levels
-Resources
-Resource Holding
-Unit Selection
-Unit Control
-Win Conditions
-Loss Conditions
-Music/Sound
-Level Select
-Camera
-Collision
-Buildings
+------------------
+Pirority
+------------------
+High
+- Game Master
+- AI
+- Units
+- Spawning
+- Resources
+- Resource Holding
+- Unit Selection
+- Unit Control
+- Level Design
+- Camera
+Medium
+- Menus
+- Fog of War
+- Loss Conditions
+- Buildings
+Low
+- Win Conditions
+- Music/Sound
+- Level Select
+- Collision
+- Fog of War
+- Minimap
+- Powerups
+
+------------------
+Individual Working On
+------------------
+Ash
+- Camera
+- Minimap
+Jordan
+- AI
+- Units
+- Resources
+- Resource Holding
+- Unit Selection
+- Unit Control
+Rob
+- Level Design
+Pete
+- Modeling
+-- Cigar Crates
+-- Units
+-- Buildings
+--- Factory
