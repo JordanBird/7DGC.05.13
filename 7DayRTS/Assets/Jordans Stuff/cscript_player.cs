@@ -22,6 +22,7 @@ public class cscript_player : MonoBehaviour {
 		if (Random.Range (0, 200) == 5)
 		{
 			GameObject newUnit = Instantiate (testUnit, new Vector3(200, 1, 200), Quaternion.identity) as GameObject;
+
 			units2.Add (newUnit);	
 		}
 	}

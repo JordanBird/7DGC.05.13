@@ -310,4 +310,9 @@ public class cscript_unit : MonoBehaviour {
 			Destroy(collision.collider.gameObject);	
 		}
 	}
+	
+	public cscript_player GetOwnedPlayer()
+	{
+		return ownedPlayer.GetComponent<cscript_player>();
+	}
 }
