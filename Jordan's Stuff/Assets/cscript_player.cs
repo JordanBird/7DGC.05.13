@@ -7,7 +7,7 @@ public class cscript_player : MonoBehaviour {
 	public int steam = 0;
 	public int electricity = 0;
 	
-	
+	public List<cscript_unit> units = new List<cscript_unit>();
 	
 	// Use this for initialization
 	void Start () {
@@ -41,6 +41,9 @@ public class cscript_player : MonoBehaviour {
 	
 	public void DeselectAllUnits()
 	{
-		
+		foreach (cscript_unit u in units)
+		{
+			u.isSelected = false;
+		}
 	}
 }

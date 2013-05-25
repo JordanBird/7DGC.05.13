@@ -272,7 +272,10 @@ public class cscript_unit : MonoBehaviour {
 	
 	void OnMouseDown() 
 	{
-        isSelected = true;
+		if (isSelected == true)
+        	isSelected = false;
+		else
+			isSelected = true;
     }
 	
 	public void CheckRightClick()

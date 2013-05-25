@@ -3,7 +3,7 @@ using System.Collections;
 
 public class cscript_master : MonoBehaviour {
 	
-	cscript_player player;
+	public cscript_player player;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,9 +12,9 @@ public class cscript_master : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0))
+		if (Input.GetMouseButtonDown (0) && Input.GetKeyDown (KeyCode.LeftShift) == false)
 		{
-			
+			player.DeselectAllUnits ();
 		}
 	}
 }
