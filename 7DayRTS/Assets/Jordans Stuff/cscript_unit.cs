@@ -25,6 +25,10 @@ public class cscript_unit : MonoBehaviour {
 	
 	public int range = 10;
 	
+	public cscript_unit attackTarget;
+	
+	public bool attack = false;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -81,6 +85,10 @@ public class cscript_unit : MonoBehaviour {
 		}
 		
 		//CheckForUnits ();
+		if (attack == true)
+		{
+			attackTarget.RemoveHelath (1);
+		}
 	}
 	
 	public bool CheckDesiredDirection()
@@ -284,22 +292,36 @@ public class cscript_unit : MonoBehaviour {
 //			//gameObject.GetComponent<LightningBolt>().SetOff();
 //	}
 	
+	void OnTriggerEnter(Collider collider)
+	{
+		if (collider.gameObject.tag == "Unit")
+		{
+			if (GetOwnedPlayer() != collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
+			{
+				Debug.Log ("Target Added");
+				
+				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+				
+				attackTarget = collider.gameObject.GetComponent<cscript_unit>();
+				attack = true;
+			}
+		}
+	}
+	
 	void OnTriggerStay(Collider collider)
 	{
 		if (collider.gameObject.tag == "Unit")
 		{
-			//if (ownedPlayer != collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
-			//{
-				//Debug.Log ("Shoot");
-			
-				//gameObject.GetComponentInChildren<LightningBolt>().SetOn();
-				//gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
-			//}
+			//attackTarget.RemoveHelath (1);
+			//Debug.Log ("Damage");
 		}
 	}
 	
 	void OnTriggerExit(Collider collider)
 	{
 		gameObject.GetComponentInChildren<LightningBolt>().SetOff();
+		attackTarget = null;
+		attack = false;
 	}
 }

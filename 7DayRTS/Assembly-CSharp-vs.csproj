@@ -44,9 +44,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Ashleys stuff\GUIDrawer.cs" />
      <Compile Include="Assets\Ashleys stuff\cameraOrbit.cs" />
      <Compile Include="Assets\Ashleys stuff\mainBaseSelect.cs" />
-     <Compile Include="Assets\Ashleys stuff\miniMap\miniMap.cs" />
      <Compile Include="Assets\Ashleys stuff\sideScroll.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_cigar_crate.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_death_zone.cs" />
