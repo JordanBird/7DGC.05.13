@@ -21,6 +21,12 @@ Medium
 Low
 - Win Conditions
 - Music/Sound
+-- Menu Music
+-- Background
+-- Damage
+-- Attack
+-- Destroyed
+-- Buildings
 - Level Select
 - Collision
 - Fog of War
@@ -34,13 +40,13 @@ Ash
 - Camera - 		In Progress 	80%
 - Minimap - 		In Progress 	50%
 Jordan
-- AI - 			In Progress 	0%
-- Units - 		In Progress 	10%
+- Units - 		In Progress 	30%
 - Resources - 		In Progress 	90%
 - Resource Holding - 	Completed 	100%
 - Unit Selection - 	In Progress 	50%
 - Unit Control - 	Completed 	100%
 - Control Points - 	Completed 	100%
+- Powerups -		In Progress 	50%
 Rob
 - Level Design - 	In Progress 	10%
 Pete
@@ -49,3 +55,31 @@ Pete
 -- Units
 -- Buildings
 --- Factory
+
+------------------
+Extra Features
+------------------
+Click a Unit and See from It's View
+
+------------------
+Units
+------------------
+Basic Gentleman
+Steam Punk Electric Shooty Thing
+Steam Punk Rocket Shooty Thing
+RoboPuppy Scout Unit?
+- Model Inspiration but Steam Punk: http://fallout.wikia.com/wiki/Rex_(Fallout:_New_Vegas)
+- RoboPuppy! https://www.youtube.com/watch?v=cvHb0GsUqrY
+Missle Unit?
+
+------------------
+Possible Sounds (URLS)
+------------------
+
+------------------
+Inspiration
+------------------
+Warehouse 13 - 	TV Show
+Sanctuary - 	TV Show
+Bioshock - 	Game
+Dishonored - 	Game
