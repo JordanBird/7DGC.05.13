@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class cscript_unit : MonoBehaviour {
 	
@@ -20,9 +21,9 @@ public class cscript_unit : MonoBehaviour {
 	
 	float distance = 0.0f;
 	
-	public Vector3 target = new Vector3(300, 0, 300);
+	public List<Vector3> targetList = new List<Vector3>();
 	bool canReachTarget = false;
-	
+
 	public int range = 10;
 	
 	public cscript_unit attackTarget;
@@ -38,6 +39,25 @@ public class cscript_unit : MonoBehaviour {
 	void Update () {
 		if (currentHealth == 0)
 			KillUnit ();
+
+		CheckRightClick ();
+		
+		Movement ();
+		
+		//CheckForUnits ();
+		if (attack == true)
+		{
+			attackTarget.RemoveHelath (1);
+		}
+		
+		//Select Unit Code
+		//if (renderer.isVisible && Input.GetMouseButton (0))
+		if (Input.GetMouseButton (0))
+		{
+			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
+			camPos.y = cscript_selection_box.InvertScreenY (camPos.y);
+			isSelected = cscript_selection_box.selection.Contains (camPos);
+		}
 		
 		if (isSelected == true)
 		{
@@ -47,47 +67,50 @@ public class cscript_unit : MonoBehaviour {
 		{
 			selectedLight.intensity = 0;
 		}
-		
-		CheckRightClick ();
-		
-		if (CheckTarget () == true)
+	}
+	
+	public void Movement()
+	{
+		if (targetList.Count > 0)
 		{
-			float x = 0;
-			float y = 0;
-			float z = 0;
-			
-			if (transform.position.x > target.x)
-				x = -0.1f;
-			else if (transform.position.x < target.x)
-				x = 0.1f;
-			
-			if (transform.position.z > target.z)
-				z = -0.1f;
-			else if (transform.position.z < target.z)
-				z = 0.1f;
-			
-			transform.position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-			canReachTarget = true;
-		}
-		else
-		{
-			if (desiredDirection == 4)
-				desiredDirection = 0;
-			
-			if (CheckDesiredDirection () == true)
+			if (CheckTarget () == true)
 			{
-				MoveDesiredDirection ();
+				float x = 0;
+				float y = 0;
+				float z = 0;
+			
+				if (transform.position.x > targetList[0].x)
+					x = -0.1f;
+				else if (transform.position.x < targetList[0].x)
+					x = 0.1f;
+			
+				if (transform.position.z > targetList[0].z)
+					z = -0.1f;
+				else if (transform.position.z < targetList[0].z)
+					z = 0.1f;
+			
+				transform.position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+				canReachTarget = true;
 			}
 			else
 			{
-				desiredDirection ++;	
+				if (desiredDirection == 4)
+					desiredDirection = 0;
+			
+				if (CheckDesiredDirection () == true)
+				{
+					MoveDesiredDirection ();
+				}
+				else
+				{
+					desiredDirection ++;	
+				}
 			}
-		}
-		
-		//CheckForUnits ();
-		if (attack == true)
-		{
-			attackTarget.RemoveHelath (1);
+			
+			if (Mathf.Abs (targetList[0].x - transform.position.x) < 2 && Mathf.Abs (targetList[0].z - transform.position.z) < 2)
+			{
+				targetList.RemoveAt (0);	
+			}
 		}
 	}
 	
@@ -181,12 +204,17 @@ public class cscript_unit : MonoBehaviour {
 	
 	public bool CheckTarget()
 	{
-		Debug.DrawRay(transform.position, target, Color.green);
+		if (targetList.Count > 0)
+		{
+			Debug.DrawRay(transform.position, targetList[0], Color.green);
 		
-		if(Physics.Raycast(transform.position, target, 0.1f) == false)
-			return true;
-		else
-			return false;
+			if(Physics.Raycast(transform.position, targetList[0], 0.1f) == false)
+				return true;
+			else
+				return false;
+		}
+		
+		return false;
 	}
 	
 	public void SetMaxHealth(int mh)
@@ -227,7 +255,7 @@ public class cscript_unit : MonoBehaviour {
 	{
 		if (isSelected == true)
 		{
-			if (Input.GetMouseButtonDown (1))
+			if (Input.GetMouseButtonDown (1) && Input.GetKey(KeyCode.LeftShift) == false)
 			{
 				RaycastHit hit;
             	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -237,12 +265,28 @@ public class cscript_unit : MonoBehaviour {
 					UpdateTarget (hit.point);
 				}
 			}
+			else if(Input.GetMouseButtonDown (1) && Input.GetKey(KeyCode.LeftShift))
+			{
+				RaycastHit hit;
+            	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            	if (Physics.Raycast(ray, out hit, 1000))
+            	{
+					AddTarget (hit.point);
+				}
+			}
 		}
 	}
 	
 	public void UpdateTarget(Vector3 v)
 	{
-		target = v;
+		targetList.Clear ();
+		targetList.Add(v);
+	}
+	
+	public void AddTarget(Vector3 v)
+	{
+		targetList.Add (v);	
 	}
 	
 	void OnCollisionEnter(Collision collision)
