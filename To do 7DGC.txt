@@ -37,8 +37,10 @@ Low
 Individual Working On
 ------------------
 Ash
-- Camera - 		In Progress 	80%
-- Minimap - 		In Progress 	50%
+- Camera - 		Completed 	100%
+- Minimap - 		In Progress 	80%
+- GUI Code -		In Progress 	50%
+- Sounds -		Yet to start
 Jordan
 - Units - 		In Progress 	30%
 - Resources - 		In Progress 	90%

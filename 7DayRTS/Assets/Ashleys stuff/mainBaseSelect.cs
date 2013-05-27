@@ -4,6 +4,7 @@ using System.Collections;
 public class mainBaseSelect : MonoBehaviour {
 	
 	bool selected = false;
+	public GameObject testUnit;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,7 +20,14 @@ public class mainBaseSelect : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
-		selected = true;
+		if (selected == false)
+		{
+			selected = true;
+		}
+		else
+		{
+			selected = false;
+		}
 	}
 	
 	void OnGUI()
@@ -27,7 +35,10 @@ public class mainBaseSelect : MonoBehaviour {
 		GUI.depth = 1;
 		if (selected == true)
 		{
-			GUI.Button(new Rect(400, Screen.height - 150,150,50), "Spawn Unit");
+			if(GUI.Button(new Rect(400, Screen.height - 150,150,50), "Spawn Unit"))
+			{
+				GameObject newUnit = Instantiate (testUnit, new Vector3(200, 1, 200), Quaternion.identity) as GameObject;
+			}
 		}
 	}
 }
