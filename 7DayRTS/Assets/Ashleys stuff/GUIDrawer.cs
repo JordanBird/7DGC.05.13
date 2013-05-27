@@ -13,15 +13,17 @@ public class GUIDrawer : MonoBehaviour {
 	
 	}
 	
-	public Texture aTexture;
+	public Texture miniMapMask;
 	public Texture bTexture;
+	public Texture sepiaTest;
     void OnGUI() {
 		GUI.depth = 20;
-        if (!aTexture) {
+        if (!miniMapMask) {
             Debug.LogError("Assign a Texture in the inspector.");
             return;
         }
-        GUI.DrawTexture(new Rect(0, Screen.height - 220, 220,220), aTexture);
-		GUI.DrawTexture(new Rect(220, Screen.height - 190, Screen.width, 190), bTexture);
+        GUI.DrawTexture(new Rect(0, Screen.height - 275, 370,275), miniMapMask);
+		GUI.DrawTexture(new Rect(270, Screen.height - 275, Screen.width, 275), bTexture);
+		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), sepiaTest);
     }
 }
