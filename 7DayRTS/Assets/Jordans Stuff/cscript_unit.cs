@@ -47,7 +47,14 @@ public class cscript_unit : MonoBehaviour {
 		//CheckForUnits ();
 		if (attack == true)
 		{
-			attackTarget.RemoveHelath (1);
+			if (attackTarget != null)
+				attackTarget.RemoveHelath (1);
+			else
+			{
+				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
+				attackTarget = null;
+				attack = false;
+			}
 		}
 		
 		//Select Unit Code
@@ -312,6 +319,11 @@ public class cscript_unit : MonoBehaviour {
 	{
 		return ownedPlayer.GetComponent<cscript_player>();
 	}
+	
+	public void SetOwnedPlayer(GameObject p)
+	{
+		ownedPlayer = p;
+	}
 //	
 //	public void CheckForUnits()
 //	{
@@ -353,19 +365,16 @@ public class cscript_unit : MonoBehaviour {
 		}
 	}
 	
-	void OnTriggerStay(Collider collider)
+	void OnTriggerExit(Collider collider)
 	{
 		if (collider.gameObject.tag == "Unit")
 		{
-			//attackTarget.RemoveHelath (1);
-			//Debug.Log ("Damage");
+			if (GetOwnedPlayer() == collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
+			{
+				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
+				attackTarget = null;
+				attack = false;
+			}
 		}
-	}
-	
-	void OnTriggerExit(Collider collider)
-	{
-		gameObject.GetComponentInChildren<LightningBolt>().SetOff();
-		attackTarget = null;
-		attack = false;
 	}
 }
