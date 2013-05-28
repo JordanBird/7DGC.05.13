@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\guiButtonDrawer.cs">
+    <Files>
+      <File FileName="Assets\Scripts\guiButtonDrawer.cs" Line="45" Column="23" />
+      <File FileName="Assets\Scripts\miniMapDrawer.cs" Line="17" Column="3" />
+      <File FileName="Assets\Scripts\toolTips.cs" Line="21" Column="72" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
