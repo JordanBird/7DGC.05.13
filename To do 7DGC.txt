@@ -45,7 +45,7 @@ Jordan
 - Units - 		In Progress 	30%
 - Resources - 		In Progress 	90%
 - Resource Holding - 	Completed 	100%
-- Unit Selection - 	In Progress 	50%
+- Unit Selection - 	In Progress 	80%
 - Unit Control - 	Completed 	100%
 - Control Points - 	Completed 	100%
 - Powerups -		In Progress 	50%

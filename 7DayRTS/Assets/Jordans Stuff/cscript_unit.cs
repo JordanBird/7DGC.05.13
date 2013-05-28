@@ -15,6 +15,9 @@ public class cscript_unit : MonoBehaviour {
 	
 	public Light selectedLight;
 	
+	public int steamRequirement = 1000;
+	public int electricityRequirement = 1000;
+	
 	//Pathfinding
 	int currentDirection = 0;
 	int desiredDirection = 0;
@@ -179,7 +182,7 @@ public class cscript_unit : MonoBehaviour {
 			{
 				rigidbody.AddForce (new Vector3(0.1f, 0, 0));
 				//transform.position = new Vector3(transform.position.x + 0.1f, transform.position.y, transform.position.z);
-				Debug.DrawRay(transform.position, new Vector3(1, 0, 0), Color.green);
+				Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0, 0), Color.green);
 			}
 			break;
 		case 1:
@@ -187,7 +190,7 @@ public class cscript_unit : MonoBehaviour {
 			{
 				rigidbody.AddForce (new Vector3(-0.1f, 0, 0));
 				//transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
-				Debug.DrawRay(transform.position, new Vector3(-1, 0, 0), Color.green);
+				Debug.DrawLine(transform.position, transform.position + new Vector3(-1, 0, 0), Color.green);
 			}
 			break;
 		case 2:
@@ -195,7 +198,7 @@ public class cscript_unit : MonoBehaviour {
 			{
 				rigidbody.AddForce (new Vector3(0, 0, 0.1f));
 				//transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.1f);
-				Debug.DrawRay(transform.position, new Vector3(0, 0, 1), Color.green);
+				Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 1), Color.green);
 			}
 			break;
 		case 3:
@@ -203,7 +206,7 @@ public class cscript_unit : MonoBehaviour {
 			{
 				rigidbody.AddForce (new Vector3(0, 0, -0.1f));
 				//transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.1f);
-				Debug.DrawRay(transform.position, new Vector3(0, 0, -1), Color.green);
+				Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, -1), Color.green);
 			}
 			break;
 		}
@@ -213,7 +216,8 @@ public class cscript_unit : MonoBehaviour {
 	{
 		if (targetList.Count > 0)
 		{
-			Debug.DrawRay(transform.position, targetList[0], Color.green);
+			transform.LookAt (targetList[0]);
+			Debug.DrawLine (transform.position, targetList[0], Color.green);
 		
 			if(Physics.Raycast(transform.position, targetList[0], 0.1f) == false)
 				return true;
@@ -294,6 +298,16 @@ public class cscript_unit : MonoBehaviour {
 	public void AddTarget(Vector3 v)
 	{
 		targetList.Add (v);	
+	}
+	
+	public int GetSteamRequirement()
+	{
+		return steamRequirement;	
+	}
+	
+	public int GetElectricityRequirement()
+	{
+		return electricityRequirement;	
 	}
 	
 	void OnCollisionEnter(Collision collision)

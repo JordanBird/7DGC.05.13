@@ -34,17 +34,22 @@ public class cscript_player : MonoBehaviour {
 		
 		if (Input.GetKeyDown (KeyCode.B))
 		{
-			Destroy(currentGhostBuilding);
+			if (currentGhostBuilding == null)
+			{
+				Destroy(currentGhostBuilding);
 			
-			RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
+            	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 1000))
-            {
-				currentGhostBuilding = Instantiate (ghostBuilding, hit.point, Quaternion.identity) as GameObject;
+            	if (Physics.Raycast(ray, out hit, 1000))
+            	{
+					currentGhostBuilding = Instantiate (ghostBuilding, hit.point, Quaternion.identity) as GameObject;
+				}
+				else
+					currentGhostBuilding = Instantiate (ghostBuilding, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 			}
 			else
-				currentGhostBuilding = Instantiate (ghostBuilding, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+				Destroy(currentGhostBuilding);
 		}
 		
 		if (currentGhostBuilding != null)
@@ -60,11 +65,17 @@ public class cscript_player : MonoBehaviour {
 		
 		if (Input.GetMouseButtonDown (0) && currentGhostBuilding != null)
 		{
-			GameObject newBuilding = Instantiate (testBuilding, currentGhostBuilding.transform.position, Quaternion.identity) as GameObject;
-			newBuilding.GetComponent<cscript_building>().SetOwnedPlayer (gameObject);
-			buildings.Add (newBuilding);
-			
-			Destroy(currentGhostBuilding);
+			if (steam >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam () && electricity >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity())
+			{
+				GameObject newBuilding = Instantiate (testBuilding, currentGhostBuilding.transform.position, Quaternion.identity) as GameObject;
+				newBuilding.GetComponent<cscript_building>().SetOwnedPlayer (gameObject);
+				buildings.Add (newBuilding);
+				
+				RemoveSteam(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam ());
+				RemoveElectricity(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity ());
+				
+				Destroy(currentGhostBuilding);
+			}
 		}
 	}
 	
@@ -86,6 +97,16 @@ public class cscript_player : MonoBehaviour {
 	public void RemoveElectricity(int e)
 	{
 		electricity -= e;
+	}
+	
+	public int GetSteam()
+	{
+		return steam;
+	}
+	
+	public int GetElectricity()
+	{
+		return electricity;
 	}
 	
 	public void DeselectAllUnits()

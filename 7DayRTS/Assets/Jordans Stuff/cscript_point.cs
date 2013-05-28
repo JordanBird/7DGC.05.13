@@ -26,6 +26,7 @@ public class cscript_point : MonoBehaviour {
 		
 		if (CheckForUnits() == true)
 		{
+			Debug.Log ("Unit Present!");
 			foreach (GameObject g in GetCollidingUnits())
 			{
 				if (captureProgress == 0)
