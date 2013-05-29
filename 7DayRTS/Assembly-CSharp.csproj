@@ -46,8 +46,11 @@
   <ItemGroup>
      <Compile Include="Assets\Ashleys stuff\GUIDrawer.cs" />
      <Compile Include="Assets\Ashleys stuff\cameraOrbit.cs" />
+     <Compile Include="Assets\Ashleys stuff\guiButtonDrawer.cs" />
      <Compile Include="Assets\Ashleys stuff\mainBaseSelect.cs" />
+     <Compile Include="Assets\Ashleys stuff\miniMapDrawer.cs" />
      <Compile Include="Assets\Ashleys stuff\sideScroll.cs" />
+     <Compile Include="Assets\Jordans Stuff\cscript_AI.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_building.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_cigar_crate.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_death_zone.cs" />

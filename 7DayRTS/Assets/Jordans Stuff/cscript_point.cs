@@ -27,6 +27,7 @@ public class cscript_point : MonoBehaviour {
 		if (CheckForUnits() == true)
 		{
 			Debug.Log ("Unit Present!");
+			
 			foreach (GameObject g in GetCollidingUnits())
 			{
 				if (captureProgress == 0)
@@ -45,8 +46,21 @@ public class cscript_point : MonoBehaviour {
 			}
 		}
 		
+		if (captureProgress > 0 && captureProgress < captureRequirement)
+		{
+			captureProgress -= 1;
+			
+			if (captureProgress < 0)
+				captureProgress = 0;
+		}
+		
 		if (captureProgress == 0)
 			ownedPlayer = null;
+		
+		if (captureProgress != 0)
+		{
+			//GUI.Label(Rect(Camera.main.WorldToViewportPoint (transform.position)), "Capture Progress: " + captureProgress + " / " + captureRequirement);
+		}
 	}
 	
 	public void LowerCaptureProgress(int i)
@@ -68,6 +82,11 @@ public class cscript_point : MonoBehaviour {
 	public void ChangeOwnedPlayer(cscript_player p)
 	{
 		ownedPlayer = p;
+	}
+	
+	public cscript_player GetOwnedPlayer()
+	{
+		return ownedPlayer;
 	}
 	
 	public bool CheckForUnits()

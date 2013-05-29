@@ -310,6 +310,21 @@ public class cscript_unit : MonoBehaviour {
 		return electricityRequirement;	
 	}
 	
+	public Vector3 GetCurrentTarget()
+	{
+		if (targetList.Count > 0)
+		{
+			return targetList[0];
+		}
+		else
+			return Vector3.zero;
+	}
+	
+	public bool GetAttackStatus()
+	{
+		return attack;	
+	}
+	
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.collider.gameObject.tag == "Cigar Crate")
