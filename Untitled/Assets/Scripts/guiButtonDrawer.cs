@@ -6,7 +6,7 @@ public class guiButtonDrawer : MonoBehaviour {
   	public Texture menuButtonUp;
 	public Texture menuButtonDown;
 	public Texture menuButtonOver;
-	public string newToolTipText;
+	string newToolTipText;
 	
 	Texture menuCurrent;
 	
@@ -46,7 +46,7 @@ public class guiButtonDrawer : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0))
 			{
 				menuCurrent = menuButtonDown;
-				this.GetComponent<GUIDrawer>().drawMenu = true;
+				this.GetComponent<menuDrawer>().drawMenu = true;
 			}
 		}
 		else

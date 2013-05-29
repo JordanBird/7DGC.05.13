@@ -14,11 +14,8 @@ public class GUIDrawer : MonoBehaviour {
 	public Texture oneNipple;
 	public Texture bottomBarOverlay;
 	public Texture bottomBarRight;
-	public Texture logo;
-	public Texture menuBackBlock;
 	
 	public bool drawGUI;	
-	public bool drawMenu;
 		
     void OnGUI() {		
 		if (drawGUI == true)
@@ -37,14 +34,6 @@ public class GUIDrawer : MonoBehaviour {
 		GUI.DrawTexture(new Rect(Screen.width - 200, 10,31,31), oneNipple);
 		GUI.DrawTexture(new Rect(500, Screen.height - 163, Screen.width-750, 153), bottomBarOverlay);
 		GUI.DrawTexture(new Rect(Screen.width - 275, Screen.height - 163, 275, 153), bottomBarRight);
-			
-		if (drawMenu == true)
-			{
-				Time.timeScale=0;
-				GUI.DrawTexture(new Rect(Screen.width/2 - 250, 40, 500, 156), logo);
-				GUI.DrawTexture(new Rect(Screen.width/2-245, 225, 500, 350), menuBackBlock);
-				
-			}
-		}
 	}
+}
 }

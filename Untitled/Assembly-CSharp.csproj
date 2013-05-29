@@ -46,7 +46,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GUIDrawer.cs" />
      <Compile Include="Assets\Scripts\LightningBolt.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\optionsSelect.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\playGameSelecter.cs" />
      <Compile Include="Assets\Scripts\Perlin.cs" />
+     <Compile Include="Assets\Scripts\animationPlay.cs" />
      <Compile Include="Assets\Scripts\cameraOrbit.cs" />
      <Compile Include="Assets\Scripts\cscript_building.cs" />
      <Compile Include="Assets\Scripts\cscript_cigar_crate.cs" />
@@ -59,6 +62,7 @@
      <Compile Include="Assets\Scripts\cscript_unit.cs" />
      <Compile Include="Assets\Scripts\guiButtonDrawer.cs" />
      <Compile Include="Assets\Scripts\mainBaseSelect.cs" />
+     <Compile Include="Assets\Scripts\menuDrawer.cs" />
      <Compile Include="Assets\Scripts\miniMapDrawer.cs" />
      <Compile Include="Assets\Scripts\sideScroll.cs" />
      <Compile Include="Assets\Scripts\toolTips.cs" />
