@@ -8,12 +8,14 @@ public class cscript_selection_box : MonoBehaviour {
 	public Vector3 startClick = -Vector3.one;
 	
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		UpdateSelection ();
 	}
 	

@@ -52,14 +52,17 @@
      <Compile Include="Assets\Scripts\Perlin.cs" />
      <Compile Include="Assets\Scripts\animationPlay.cs" />
      <Compile Include="Assets\Scripts\cameraOrbit.cs" />
+     <Compile Include="Assets\Scripts\cscript_AI.cs" />
      <Compile Include="Assets\Scripts\cscript_building.cs" />
      <Compile Include="Assets\Scripts\cscript_cigar_crate.cs" />
+     <Compile Include="Assets\Scripts\cscript_death_animation.cs" />
      <Compile Include="Assets\Scripts\cscript_death_zone.cs" />
      <Compile Include="Assets\Scripts\cscript_master.cs" />
      <Compile Include="Assets\Scripts\cscript_mini_map.cs" />
      <Compile Include="Assets\Scripts\cscript_player.cs" />
      <Compile Include="Assets\Scripts\cscript_point.cs" />
      <Compile Include="Assets\Scripts\cscript_selection_box.cs" />
+     <Compile Include="Assets\Scripts\cscript_turret.cs" />
      <Compile Include="Assets\Scripts\cscript_unit.cs" />
      <Compile Include="Assets\Scripts\guiButtonDrawer.cs" />
      <Compile Include="Assets\Scripts\mainBaseSelect.cs" />

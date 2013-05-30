@@ -6,17 +6,22 @@ public class cscript_player : MonoBehaviour {
 	
 	public int steam = 0;
 	public int electricity = 0;
-	
-	public List<cscript_unit> units = new List<cscript_unit>();
-	public List<GameObject> units2 = new List<GameObject>();
+
+	public List<GameObject> units = new List<GameObject>();
 	
 	public List<GameObject> buildings = new List<GameObject>();
+	//public List<GameObject> ghostBuildings = new List<GameObject>();
 	
-	public GameObject testUnit;
-	public GameObject testBuilding;
-	public GameObject ghostBuilding;
+	public GameObject baseFactory;
+	public GameObject ghostBaseFactory;
+	
+	public GameObject turret;
+	public GameObject ghostTurret;
 	
 	public GameObject currentGhostBuilding;
+	public string currentGhostName = "";
+	
+	public bool AIPlayer = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -32,9 +37,9 @@ public class cscript_player : MonoBehaviour {
 			//units2.Add (newUnit);
 		//}
 		
-		if (Input.GetKeyDown (KeyCode.B))
+		if (Input.GetKeyDown (KeyCode.B) && AIPlayer == false)
 		{
-			if (currentGhostBuilding == null)
+			if (currentGhostBuilding == null || currentGhostName != ghostBaseFactory.name)
 			{
 				Destroy(currentGhostBuilding);
 			
@@ -43,10 +48,34 @@ public class cscript_player : MonoBehaviour {
 
             	if (Physics.Raycast(ray, out hit, 1000))
             	{
-					currentGhostBuilding = Instantiate (ghostBuilding, hit.point, Quaternion.identity) as GameObject;
+					currentGhostBuilding = Instantiate (ghostBaseFactory, hit.point, Quaternion.identity) as GameObject;
 				}
 				else
-					currentGhostBuilding = Instantiate (ghostBuilding, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+					currentGhostBuilding = Instantiate (ghostBaseFactory, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+				
+				currentGhostName = ghostBaseFactory.name;
+			}
+			else
+				Destroy(currentGhostBuilding);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.T) && AIPlayer == false)
+		{
+			if (currentGhostBuilding == null || currentGhostName != ghostTurret.name)
+			{
+				Destroy(currentGhostBuilding);
+			
+				RaycastHit hit;
+            	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            	if (Physics.Raycast(ray, out hit, 1000))
+            	{
+					currentGhostBuilding = Instantiate (ghostTurret, hit.point, Quaternion.identity) as GameObject;
+				}
+				else
+					currentGhostBuilding = Instantiate (ghostTurret, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+				
+				currentGhostName = ghostTurret.name;
 			}
 			else
 				Destroy(currentGhostBuilding);
@@ -62,19 +91,66 @@ public class cscript_player : MonoBehaviour {
 				currentGhostBuilding.transform.position =  hit.point;
 			}
 		}
-		
-		if (Input.GetMouseButtonDown (0) && currentGhostBuilding != null)
+
+		if (Input.GetMouseButtonDown (0) && currentGhostBuilding != null && AIPlayer == false)
 		{
-			if (steam >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam () && electricity >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity())
+			GameObject buildingToSpawn;
+			Debug.Log (currentGhostBuilding.name);
+			switch (currentGhostBuilding.name)
 			{
-				GameObject newBuilding = Instantiate (testBuilding, currentGhostBuilding.transform.position, Quaternion.identity) as GameObject;
-				newBuilding.GetComponent<cscript_building>().SetOwnedPlayer (gameObject);
-				buildings.Add (newBuilding);
+				case "prefab_base_factory_ghost(Clone)":
+					buildingToSpawn = baseFactory;
+					
+					if (steam >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam () && electricity >= currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity())
+					{
+						GameObject newBuilding = Instantiate (buildingToSpawn, currentGhostBuilding.transform.position, Quaternion.identity) as GameObject;
+						newBuilding.GetComponent<cscript_building>().SetOwnedPlayer (gameObject);
+						buildings.Add (newBuilding);
 				
-				RemoveSteam(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam ());
-				RemoveElectricity(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity ());
+						RemoveSteam(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredSteam ());
+						RemoveElectricity(currentGhostBuilding.GetComponent<cscript_building>().GetRequiredElectricity ());
 				
-				Destroy(currentGhostBuilding);
+						Destroy(currentGhostBuilding);
+					}
+					
+					break;
+				case "prefab_turret_ghost(Clone)":
+					buildingToSpawn = turret;
+					
+					if (steam >= currentGhostBuilding.GetComponentInChildren<cscript_turret>().GetRequiredSteam () && electricity >= currentGhostBuilding.GetComponentInChildren<cscript_turret>().GetRequiredElectricity())
+					{
+						GameObject newBuilding = Instantiate (buildingToSpawn, currentGhostBuilding.transform.position, Quaternion.identity) as GameObject;
+						newBuilding.GetComponentInChildren<cscript_turret>().SetOwnedPlayer (gameObject);
+						Debug.Log ("Set Player");
+						buildings.Add (newBuilding);
+				
+						RemoveSteam(currentGhostBuilding.GetComponentInChildren<cscript_building>().GetRequiredSteam ());
+						RemoveElectricity(currentGhostBuilding.GetComponentInChildren<cscript_building>().GetRequiredElectricity ());
+				
+						Destroy(currentGhostBuilding);
+					}
+				
+					break;
+				default:
+					return;
+			}
+		}
+		
+		for (int i = 0; i < units.Count; i++)
+		{
+			if (units[i] == null)
+			{
+				units.RemoveAt (i);	
+				i--;
+			}
+		}
+		
+		for (int i = 0; i < buildings.Count; i++)
+		{
+			if (buildings[i] == null)
+			{
+				buildings.RemoveAt (i);	
+				i--;
 			}
 		}
 	}
@@ -109,16 +185,18 @@ public class cscript_player : MonoBehaviour {
 		return electricity;
 	}
 	
-	public void DeselectAllUnits()
-	{
-		foreach (cscript_unit u in units)
-		{
-			u.isSelected = false;
-		}
-	}
-	
 	public void AddUnit(GameObject u)
 	{
-		units2.Add (u);
+		units.Add (u);
+	}
+	
+	public int GetUnitCount()
+	{
+		return units.Count;
+	}
+	
+	public int GetBuildingCount()
+	{
+		return buildings.Count;
 	}
 }

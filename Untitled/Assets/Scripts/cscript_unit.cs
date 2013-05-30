@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class cscript_unit : MonoBehaviour {
 	
+	public GameObject deathAnimation;
+	
 	public string unitName = "";
 	
 	public int maxHealth = 100;
@@ -29,7 +31,9 @@ public class cscript_unit : MonoBehaviour {
 
 	public int range = 10;
 	
-	public cscript_unit attackTarget;
+	public cscript_unit attackTargetUnit;
+	public cscript_building attackTargetBuilding;
+	public cscript_turret attackTargetTurret;
 	
 	public bool attack = false;
 	
@@ -41,28 +45,35 @@ public class cscript_unit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentHealth == 0)
+		{
 			KillUnit ();
+		}
 
 		CheckRightClick ();
 		
 		Movement ();
 		
 		//CheckForUnits ();
+		
 		if (attack == true)
 		{
-			if (attackTarget != null)
-				attackTarget.RemoveHelath (1);
+			if (attackTargetUnit != null)
+				attackTargetUnit.RemoveHelath (1);
+			else if (attackTargetBuilding != null)
+				attackTargetBuilding.RemoveHelath (1);
+			else if (attackTargetTurret != null)
+				attackTargetTurret.RemoveHelath (1);
 			else
 			{
 				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
-				attackTarget = null;
+				attackTargetUnit = null;
 				attack = false;
 			}
 		}
 		
 		//Select Unit Code
 		//if (renderer.isVisible && Input.GetMouseButton (0))
-		if (Input.GetMouseButton (0))
+		if (Input.GetMouseButton (0) && GameObject.FindGameObjectWithTag("Master").GetComponent<cscript_master>().GetPlayer () == ownedPlayer.GetComponent<cscript_player>())
 		{
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
 			camPos.y = cscript_selection_box.InvertScreenY (camPos.y);
@@ -90,14 +101,14 @@ public class cscript_unit : MonoBehaviour {
 				float z = 0;
 			
 				if (transform.position.x > targetList[0].x)
-					x = -0.1f;
+					x = -0.2f;
 				else if (transform.position.x < targetList[0].x)
-					x = 0.1f;
+					x = 0.2f;
 			
 				if (transform.position.z > targetList[0].z)
-					z = -0.1f;
+					z = -0.2f;
 				else if (transform.position.z < targetList[0].z)
-					z = 0.1f;
+					z = 0.2f;
 			
 				transform.position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
 				canReachTarget = true;
@@ -116,8 +127,8 @@ public class cscript_unit : MonoBehaviour {
 					desiredDirection ++;	
 				}
 			}
-			
-			if (Mathf.Abs (targetList[0].x - transform.position.x) < 2 && Mathf.Abs (targetList[0].z - transform.position.z) < 2)
+
+			if (Mathf.Abs (targetList[0].x - transform.position.x) < 4 && Mathf.Abs (targetList[0].z - transform.position.z) < 4)
 			{
 				targetList.RemoveAt (0);	
 			}
@@ -219,7 +230,7 @@ public class cscript_unit : MonoBehaviour {
 			transform.LookAt (targetList[0]);
 			Debug.DrawLine (transform.position, targetList[0], Color.green);
 		
-			if(Physics.Raycast(transform.position, targetList[0], 0.1f) == false)
+			if(Physics.Raycast(transform.position, targetList[0], 0.1f, ~(1 << 9)) == false)
 				return true;
 			else
 				return false;
@@ -251,6 +262,7 @@ public class cscript_unit : MonoBehaviour {
 	
 	public void KillUnit()
 	{
+		GameObject newUnit = Instantiate (deathAnimation, transform.position, Quaternion.identity) as GameObject;
 		Destroy (gameObject);
 	}
 	
@@ -310,6 +322,21 @@ public class cscript_unit : MonoBehaviour {
 		return electricityRequirement;	
 	}
 	
+	public Vector3 GetCurrentTarget()
+	{
+		if (targetList.Count > 0)
+		{
+			return targetList[0];
+		}
+		else
+			return Vector3.zero;
+	}
+	
+	public bool GetAttackStatus()
+	{
+		return attack;	
+	}
+	
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.collider.gameObject.tag == "Cigar Crate")
@@ -338,29 +365,6 @@ public class cscript_unit : MonoBehaviour {
 	{
 		ownedPlayer = p;
 	}
-//	
-//	public void CheckForUnits()
-//	{
-//		bool shot = false;
-//		
-//		Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
-//		
-//		foreach (Collider c in hitColliders)
-//		{
-//			Debug.Log (c.gameObject.tag);
-////			if (c.gameObject.tag == "Enemy Test")
-////			{
-////				Debug.Log ("Shoot");
-////				gameObject.GetComponent<LightningBolt>().SetOn ();
-////				gameObject.GetComponent<LightningBolt>().target = c.transform;
-////				
-////				shot = true;
-////			}
-//		}
-//		
-//		//if (shot == false)
-//			//gameObject.GetComponent<LightningBolt>().SetOff();
-//	}
 	
 	void OnTriggerEnter(Collider collider)
 	{
@@ -368,12 +372,38 @@ public class cscript_unit : MonoBehaviour {
 		{
 			if (GetOwnedPlayer() != collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
 			{
-				Debug.Log ("Target Added");
+				Debug.Log ("Unit Target Added");
 				
 				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
 				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
 				
-				attackTarget = collider.gameObject.GetComponent<cscript_unit>();
+				attackTargetUnit = collider.gameObject.GetComponent<cscript_unit>();
+				attack = true;
+			}
+		}
+		else if (collider.gameObject.tag == "Building")
+		{
+			if (GetOwnedPlayer() != collider.gameObject.GetComponent<cscript_building>().GetOwnedPlayer ().GetComponent<cscript_player>())
+			{
+				Debug.Log ("Building Target Added");
+				
+				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+				
+				attackTargetBuilding = collider.gameObject.GetComponent<cscript_building>();
+				attack = true;
+			}
+		}
+		else if (collider.gameObject.tag == "Turret")
+		{
+			if (GetOwnedPlayer() != collider.gameObject.GetComponentInChildren<cscript_turret>().GetOwnedPlayer().GetComponent<cscript_player>())
+			{
+				Debug.Log ("Turret Target Added");
+				
+				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+				
+				attackTargetTurret = collider.gameObject.GetComponentInChildren<cscript_turret>();
 				attack = true;
 			}
 		}
@@ -386,7 +416,7 @@ public class cscript_unit : MonoBehaviour {
 			if (GetOwnedPlayer() == collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
 			{
 				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
-				attackTarget = null;
+				attackTargetUnit = null;
 				attack = false;
 			}
 		}
