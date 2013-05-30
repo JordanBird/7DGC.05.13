@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Main Menu\optionsSelect.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Main Menu\mainMenuSelecter.cs">
     <Files>
-      <File FileName="Assets\Scripts\Main Menu\playGameSelecter.cs" Line="18" Column="38" />
-      <File FileName="Assets\Scripts\Main Menu\optionsSelect.cs" Line="15" Column="3" />
+      <File FileName="Assets\Scripts\Main Menu\optionsSelect.cs" Line="30" Column="36" />
+      <File FileName="Assets\Scripts\Main Menu\mainMenuSelecter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\sideScroll.cs" Line="82" Column="21" />
+      <File FileName="Assets\Scripts\GUIDrawer.cs" Line="18" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

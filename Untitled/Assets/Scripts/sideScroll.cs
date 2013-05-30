@@ -12,12 +12,12 @@ public class sideScroll : MonoBehaviour {
 	public bool displayCurrentLocation;
 	public float mapMaxX, mapMinX, mapMaxZ, mapMinZ;
 	int directionIndex, lastDirectionIndex;
-	
 
 	// Use this for initialization
 	void Start () {
 	multiplyer = scrollMultiplyer;
 	}
+	
 	
 	// Update is called once per frame
 	void Update () 
@@ -61,30 +61,31 @@ public class sideScroll : MonoBehaviour {
 		}
 		mousePos = Input.mousePosition;
 		
-		if(mousePos.y >= Screen.height - 20)
+		if(mousePos.y >= Screen.height - 50)
 		{
 			moveUp();
 			directionIndex = 3;
 			checkDirectionIndex();
 		}
-		if(mousePos.x >= Screen.width - 20)
+		if(mousePos.x >= Screen.width - 50)
 		{
 			moveRight();
 			directionIndex = 2;
 			checkDirectionIndex();
 		}
-		if(mousePos.y <= 20)
+		if(mousePos.y <= 230 && mousePos.y >= 180)
 		{
 			moveDown();
 			directionIndex = 4;
 			checkDirectionIndex();
 		}
-		if(mousePos.x <= 20)
+		if(mousePos.x <= 50)
 		{
 			moveLeft();
 			directionIndex = 1;
 			checkDirectionIndex();
 		}
+		
 		lastDirectionIndex = directionIndex;
 		if(Input.GetKey(KeyCode.Mouse2))
 		{

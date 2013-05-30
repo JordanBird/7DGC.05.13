@@ -20,7 +20,7 @@ public class playGameSelecter : MonoBehaviour {
 	
 	void OnMouseExit()
 	{
-		targetLight.light.intensity = 0f;
+		targetLight.light.intensity = 0.1f;
 	}
 	
 	void OnMouseDown()
