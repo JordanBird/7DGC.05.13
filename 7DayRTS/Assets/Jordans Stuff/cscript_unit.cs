@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class cscript_unit : MonoBehaviour {
 	
+	public GameObject deathAnimation;
+	
 	public string unitName = "";
 	
 	public int maxHealth = 100;
@@ -41,13 +43,16 @@ public class cscript_unit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentHealth == 0)
+		{
 			KillUnit ();
+		}
 
 		CheckRightClick ();
 		
 		Movement ();
 		
 		//CheckForUnits ();
+		
 		if (attack == true)
 		{
 			if (attackTarget != null)
@@ -62,7 +67,7 @@ public class cscript_unit : MonoBehaviour {
 		
 		//Select Unit Code
 		//if (renderer.isVisible && Input.GetMouseButton (0))
-		if (Input.GetMouseButton (0))
+		if (Input.GetMouseButton (0) && GameObject.FindGameObjectWithTag("Master").GetComponent<cscript_master>().GetPlayer () == ownedPlayer.GetComponent<cscript_player>())
 		{
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
 			camPos.y = cscript_selection_box.InvertScreenY (camPos.y);
@@ -251,6 +256,7 @@ public class cscript_unit : MonoBehaviour {
 	
 	public void KillUnit()
 	{
+		GameObject newUnit = Instantiate (deathAnimation, transform.position, Quaternion.identity) as GameObject;
 		Destroy (gameObject);
 	}
 	

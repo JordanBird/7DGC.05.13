@@ -30,7 +30,8 @@ public class cscript_building : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		rallyPoint = new Vector3(this.transform.position.x + 15, 0, this.transform.position.z + 5);
 		
 		if (spawnUnits == true)
