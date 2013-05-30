@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class cscript_building : MonoBehaviour {
 	
+	public GameObject deathAnimation;
 	public string buildingName = "";
 	
 	public int maxHealth = 100;
@@ -52,6 +53,33 @@ public class cscript_building : MonoBehaviour {
 			}
 		}
 		
+	}
+	
+	public void AddHealth(int h)
+	{
+		currentHealth += h;
+		
+		if (currentHealth > maxHealth)
+			currentHealth = maxHealth;
+	}
+	
+	public void RemoveHelath(int h)
+	{
+		currentHealth -= h;
+		
+		if (currentHealth == 0)
+			KillBuilding();
+	}
+	
+	public void KillBuilding()
+	{
+		GameObject newUnit1 = Instantiate (deathAnimation, transform.position, Quaternion.identity) as GameObject;
+		GameObject newUnit2 = Instantiate (deathAnimation, new Vector3(transform.position.x + 2, transform.position.y + 2, transform.position.z + 2), Quaternion.identity) as GameObject;
+		GameObject newUnit3 = Instantiate (deathAnimation, new Vector3(transform.position.x - 2, transform.position.y - 2, transform.position.z - 2), Quaternion.identity) as GameObject;
+		GameObject newUnit4 = Instantiate (deathAnimation, new Vector3(transform.position.x - 2, transform.position.y + 2, transform.position.z - 2), Quaternion.identity) as GameObject;
+		GameObject newUnit5 = Instantiate (deathAnimation, new Vector3(transform.position.x + 2, transform.position.y - 2, transform.position.z + 2), Quaternion.identity) as GameObject;
+		
+		Destroy (transform.root.gameObject);
 	}
 	
 	public void SpawnUnit()

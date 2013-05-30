@@ -1,7 +1,7 @@
 Skybox
 Sounds
-Death Animations
-End Game - Loss
+Death Animations - X
+End Game - Loss - X
 Game Over Scene
 Options Menu
 Only Select Player Objects - X

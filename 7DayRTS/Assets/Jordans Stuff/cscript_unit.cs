@@ -31,7 +31,9 @@ public class cscript_unit : MonoBehaviour {
 
 	public int range = 10;
 	
-	public cscript_unit attackTarget;
+	public cscript_unit attackTargetUnit;
+	public cscript_building attackTargetBuilding;
+	public cscript_turret attackTargetTurret;
 	
 	public bool attack = false;
 	
@@ -55,12 +57,16 @@ public class cscript_unit : MonoBehaviour {
 		
 		if (attack == true)
 		{
-			if (attackTarget != null)
-				attackTarget.RemoveHelath (1);
+			if (attackTargetUnit != null)
+				attackTargetUnit.RemoveHelath (1);
+			else if (attackTargetBuilding != null)
+				attackTargetBuilding.RemoveHelath (1);
+			else if (attackTargetTurret != null)
+				attackTargetTurret.RemoveHelath (1);
 			else
 			{
 				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
-				attackTarget = null;
+				attackTargetUnit = null;
 				attack = false;
 			}
 		}
@@ -121,8 +127,8 @@ public class cscript_unit : MonoBehaviour {
 					desiredDirection ++;	
 				}
 			}
-			
-			if (Mathf.Abs (targetList[0].x - transform.position.x) < 2 && Mathf.Abs (targetList[0].z - transform.position.z) < 2)
+
+			if (Mathf.Abs (targetList[0].x - transform.position.x) < 4 && Mathf.Abs (targetList[0].z - transform.position.z) < 4)
 			{
 				targetList.RemoveAt (0);	
 			}
@@ -359,29 +365,6 @@ public class cscript_unit : MonoBehaviour {
 	{
 		ownedPlayer = p;
 	}
-//	
-//	public void CheckForUnits()
-//	{
-//		bool shot = false;
-//		
-//		Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
-//		
-//		foreach (Collider c in hitColliders)
-//		{
-//			Debug.Log (c.gameObject.tag);
-////			if (c.gameObject.tag == "Enemy Test")
-////			{
-////				Debug.Log ("Shoot");
-////				gameObject.GetComponent<LightningBolt>().SetOn ();
-////				gameObject.GetComponent<LightningBolt>().target = c.transform;
-////				
-////				shot = true;
-////			}
-//		}
-//		
-//		//if (shot == false)
-//			//gameObject.GetComponent<LightningBolt>().SetOff();
-//	}
 	
 	void OnTriggerEnter(Collider collider)
 	{
@@ -389,12 +372,38 @@ public class cscript_unit : MonoBehaviour {
 		{
 			if (GetOwnedPlayer() != collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
 			{
-				Debug.Log ("Target Added");
+				Debug.Log ("Unit Target Added");
 				
 				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
 				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
 				
-				attackTarget = collider.gameObject.GetComponent<cscript_unit>();
+				attackTargetUnit = collider.gameObject.GetComponent<cscript_unit>();
+				attack = true;
+			}
+		}
+		else if (collider.gameObject.tag == "Building")
+		{
+			if (GetOwnedPlayer() != collider.gameObject.GetComponent<cscript_building>().GetOwnedPlayer ().GetComponent<cscript_player>())
+			{
+				Debug.Log ("Building Target Added");
+				
+				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+				
+				attackTargetBuilding = collider.gameObject.GetComponent<cscript_building>();
+				attack = true;
+			}
+		}
+		else if (collider.gameObject.tag == "Turret")
+		{
+			if (GetOwnedPlayer() != collider.gameObject.GetComponentInChildren<cscript_turret>().GetOwnedPlayer().GetComponent<cscript_player>())
+			{
+				Debug.Log ("Turret Target Added");
+				
+				gameObject.GetComponentInChildren<LightningBolt>().SetOn();
+				gameObject.GetComponentInChildren<LightningBolt>().target = collider.gameObject.transform;
+				
+				attackTargetTurret = collider.gameObject.GetComponentInChildren<cscript_turret>();
 				attack = true;
 			}
 		}
@@ -407,7 +416,7 @@ public class cscript_unit : MonoBehaviour {
 			if (GetOwnedPlayer() == collider.gameObject.GetComponent<cscript_unit>().GetOwnedPlayer ())
 			{
 				gameObject.GetComponentInChildren<LightningBolt>().SetOff();
-				attackTarget = null;
+				attackTargetUnit = null;
 				attack = false;
 			}
 		}

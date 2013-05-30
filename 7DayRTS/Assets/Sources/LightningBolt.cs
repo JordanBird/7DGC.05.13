@@ -43,15 +43,21 @@ public class LightningBolt : MonoBehaviour
 		
 			for (int i=0; i < particles.Length; i++)
 			{
-				Vector3 position = Vector3.Lerp(transform.position, target.position, oneOverZigs * (float)i);
-				Vector3 offset = new Vector3(noise.Noise(timex + position.x, timex + position.y, timex + position.z),
-				noise.Noise(timey + position.x, timey + position.y, timey + position.z),
-				noise.Noise(timez + position.x, timez + position.y, timez + position.z));
-				position += (offset * scale * ((float)i * oneOverZigs));
+				try
+				{
+					Vector3 position = Vector3.Lerp(transform.position, target.position, oneOverZigs * (float)i);
+					Vector3 offset = new Vector3(noise.Noise(timex + position.x, timex + position.y, timex + position.z),
+					noise.Noise(timey + position.x, timey + position.y, timey + position.z),
+					noise.Noise(timez + position.x, timez + position.y, timez + position.z));
+					position += (offset * scale * ((float)i * oneOverZigs));
 			
-				particles[i].position = position;
-				particles[i].color = Color.white;
-				particles[i].energy = 1f;
+					particles[i].position = position;
+					particles[i].color = Color.white;
+					particles[i].energy = 1f;
+				}
+				catch
+				{
+				}
 			}
 		
 			particleEmitter.particles = particles;

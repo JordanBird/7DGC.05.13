@@ -61,7 +61,7 @@ public class cscript_AI : MonoBehaviour {
 		{
 			if (u.GetComponent<cscript_unit>().GetCurrentTarget () == Vector3.zero && u.GetComponent<cscript_unit>().GetAttackStatus() == false)
 			{
-				u.GetComponent<cscript_unit>().UpdateTarget (GetClosestObject ().transform.position);
+				u.GetComponent<cscript_unit>().UpdateTarget (GetClosestObject (u).transform.position);
 			}
 		}
 	}
@@ -81,22 +81,22 @@ public class cscript_AI : MonoBehaviour {
 		}
 	}
 	
-	public GameObject GetClosestObject()
+	public GameObject GetClosestObject(GameObject u)
 	{
 		GameObject[] unitsFound;
         unitsFound = GameObject.FindGameObjectsWithTag("Unit");
 		
-        GameObject closest;
+        GameObject closest = null;
         float distance = Mathf.Infinity;
 		
-		if (unitsFound.Length > 0)
-			closest = unitsFound[0];
-		else
-			closest = null;
+//		if (unitsFound.Length > 0)
+//			closest = unitsFound[0];
+//		else
+//			closest = null;
 
         foreach (GameObject g in unitsFound) 
 		{
-            Vector3 diff = g.transform.position - transform.position;
+            Vector3 diff = g.transform.position - u.transform.position;
             float curDistance = diff.sqrMagnitude;
 
 			if (g.GetComponent<cscript_unit>().GetOwnedPlayer() != playerObject.GetComponent<cscript_player>())
@@ -112,15 +112,51 @@ public class cscript_AI : MonoBehaviour {
 		GameObject[] pointsFound;
         pointsFound = GameObject.FindGameObjectsWithTag("Point");
 		
-		if (closest == null && pointsFound.Length > 0)
-			closest = pointsFound[0];
+//		if (closest == null && pointsFound.Length > 0)
+//			closest = pointsFound[0];
 		
 		foreach (GameObject g in pointsFound)
 		{
-            Vector3 diff = g.transform.position - transform.position;
+            Vector3 diff = g.transform.position - u.transform.position;
             float curDistance = diff.sqrMagnitude;
 			
-			if (g.GetComponent<cscript_point>().GetOwnedPlayer () != playerObject)
+			if (g.GetComponent<cscript_point>().GetOwnedPlayer () != playerObject.GetComponent<cscript_player>())
+			{
+				if (curDistance < distance) 
+				{
+                	closest = g;
+                	distance = curDistance;
+            	}
+			}
+        }
+		
+		GameObject[] buildingsFound;
+        buildingsFound = GameObject.FindGameObjectsWithTag("Building");
+		
+		foreach (GameObject g in buildingsFound)
+		{
+            Vector3 diff = g.transform.position - u.transform.position;
+            float curDistance = diff.sqrMagnitude;
+			
+			if (g.GetComponent<cscript_building>().GetOwnedPlayer () != playerObject.GetComponent<cscript_player>())
+			{
+				if (curDistance < distance) 
+				{
+                	closest = g;
+                	distance = curDistance;
+            	}
+			}
+        }
+		
+		GameObject[] turretsFound;
+        turretsFound = GameObject.FindGameObjectsWithTag("Turret");
+		
+		foreach (GameObject g in turretsFound)
+		{
+            Vector3 diff = g.transform.position - u.transform.position;
+            float curDistance = diff.sqrMagnitude;
+			
+			if (g.GetComponentInChildren<cscript_turret>().GetOwnedPlayer () != playerObject.GetComponent<cscript_player>())
 			{
 				if (curDistance < distance) 
 				{

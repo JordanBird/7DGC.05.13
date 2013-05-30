@@ -6,9 +6,8 @@ public class cscript_player : MonoBehaviour {
 	
 	public int steam = 0;
 	public int electricity = 0;
-	
-	public List<cscript_unit> units = new List<cscript_unit>();
-	public List<GameObject> units2 = new List<GameObject>();
+
+	public List<GameObject> units = new List<GameObject>();
 	
 	public List<GameObject> buildings = new List<GameObject>();
 	//public List<GameObject> ghostBuildings = new List<GameObject>();
@@ -135,8 +134,24 @@ public class cscript_player : MonoBehaviour {
 				default:
 					return;
 			}
-			
-			
+		}
+		
+		for (int i = 0; i < units.Count; i++)
+		{
+			if (units[i] == null)
+			{
+				units.RemoveAt (i);	
+				i--;
+			}
+		}
+		
+		for (int i = 0; i < buildings.Count; i++)
+		{
+			if (buildings[i] == null)
+			{
+				buildings.RemoveAt (i);	
+				i--;
+			}
 		}
 	}
 	
@@ -170,16 +185,18 @@ public class cscript_player : MonoBehaviour {
 		return electricity;
 	}
 	
-	public void DeselectAllUnits()
-	{
-		foreach (cscript_unit u in units)
-		{
-			u.isSelected = false;
-		}
-	}
-	
 	public void AddUnit(GameObject u)
 	{
-		units2.Add (u);
+		units.Add (u);
+	}
+	
+	public int GetUnitCount()
+	{
+		return units.Count;
+	}
+	
+	public int GetBuildingCount()
+	{
+		return buildings.Count;
 	}
 }

@@ -53,12 +53,14 @@
      <Compile Include="Assets\Jordans Stuff\cscript_AI.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_building.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_cigar_crate.cs" />
+     <Compile Include="Assets\Jordans Stuff\cscript_death_animation.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_death_zone.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_master.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_mini_map.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_player.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_point.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_selection_box.cs" />
+     <Compile Include="Assets\Jordans Stuff\cscript_turret.cs" />
      <Compile Include="Assets\Jordans Stuff\cscript_unit.cs" />
      <Compile Include="Assets\Sources\LightningBolt.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
