@@ -7,6 +7,10 @@ public class optionsSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animation.Stop();
+		if (!GameObject.Find("musicPlayer"))
+		{
+			
+		}
 	}
 	
 	// Update is called once per frame

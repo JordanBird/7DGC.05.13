@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{E48D6610-BFAC-CA9C-214E-56D012C02705}</ProjectGuid>
+	<ProjectGuid>{82236489-9DCD-3E89-9F6A-2DC2E51A6DB6}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Main Menu\mainMenuSelecter.cs" />
      <Compile Include="Assets\Scripts\Main Menu\optionsSelect.cs" />
      <Compile Include="Assets\Scripts\Main Menu\playGameSelecter.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\quitMouseAction.cs" />
      <Compile Include="Assets\Scripts\Misc\mainBaseSelect.cs" />
      <Compile Include="Assets\Scripts\Selection box\cscript_selection_box.cs" />
      <Compile Include="Assets\Scripts\Units\LightningBolt.cs" />
@@ -72,7 +73,6 @@
      <Compile Include="Assets\Scripts\Units\cscript_point.cs" />
      <Compile Include="Assets\Scripts\Units\cscript_turret.cs" />
      <Compile Include="Assets\Scripts\Units\cscript_unit.cs" />
-     <Compile Include="Assets\Scripts\quitMouseAction.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{32C03B9C-D56B-5F93-8DCE-4CBA87F6F2C8}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{397704CD-2297-9E4F-17B4-F58F6A538D65}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

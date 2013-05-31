@@ -14,11 +14,14 @@ public class guiButtonDrawer : MonoBehaviour {
 	
 	Vector3 mousePos;
 	
+	public bool draw;
+	
 	void Start()
 	{
 		menuRect = new Rect(2, Screen.height - 52, 50, 50);
 		newToolTipText = "";
 		menuCurrent = menuButtonUp;
+		draw = true;
 	}
 	
 	void Update()
@@ -29,11 +32,14 @@ public class guiButtonDrawer : MonoBehaviour {
 	
 	
 	void OnGUI()
-	{
+	{	
+		if (draw == true)
+		{
 		GUI.depth = 19;
 		GUI.DrawTexture(menuRect, menuCurrent);
 		//GUI.Label (new Rect(mousePos[0],Screen.height-mousePos[1]+15,200, 20), toolTipText);
-		mouseActionCheck();		
+		mouseActionCheck();	
+		}
 	}
 	
 	void mouseActionCheck()

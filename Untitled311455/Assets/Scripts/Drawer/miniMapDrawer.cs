@@ -18,6 +18,8 @@ public class miniMapDrawer : MonoBehaviour {
 	int steam, electricity, cigars, wave;
 	GUIStyle newFont;
 	
+	public bool draw;
+	
 	void Start()
 	{
 		resourceRect = new Rect(185, Screen.height - 163, 318, 153);
@@ -27,7 +29,8 @@ public class miniMapDrawer : MonoBehaviour {
 		newFont = new GUIStyle();
 		newFont.font = targetFont;
 		newFont.fontSize = 26;
-		newFont.normal.textColor = Color.white;		
+		newFont.normal.textColor = Color.white;	
+		draw = true;
 	}
 	
 	void Update()
@@ -43,6 +46,8 @@ public class miniMapDrawer : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		if (draw == true)
+		{
 		GUI.depth = 20;
         GUI.DrawTexture(new Rect(0, Screen.height - 275, 370,275), miniMapMask);
 		GUI.DrawTexture(resourceRect, resourceMask);
@@ -56,6 +61,7 @@ public class miniMapDrawer : MonoBehaviour {
 		GUI.DrawTexture(turretBut,turretButton);
 		GUI.Label (new Rect(Screen.width/2 - 100,20,200,20),string.Format("Current Wave: {0}", wave.ToString()), newFont);
 		mouseActionCheck();
+		}
 	}
 	
 	void mouseActionCheck()

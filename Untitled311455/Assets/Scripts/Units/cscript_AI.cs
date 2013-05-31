@@ -56,6 +56,7 @@ public class cscript_AI : MonoBehaviour {
 			SpawnUnits();
 			wave++;
 			GameObject.FindGameObjectWithTag ("Master").GetComponent<cscript_master>().IncreaseWave ();
+			gameObject.GetComponent<AudioSource>().Play ();
 		}
 		
 		foreach (GameObject u in units)
