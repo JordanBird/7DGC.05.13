@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Main Menu\optionsSelect.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Units\cscript_AI.cs" Line="73" Column="5" />
+      <File FileName="Assets\Scripts\Drawer\menuDrawer.cs" Line="173" Column="6" />
+      <File FileName="Assets\Scripts\Drawer\toolTips.cs" Line="27" Column="1" />
+      <File FileName="Assets\Scripts\Drawer\miniMapDrawer.cs" Line="87" Column="73" />
+      <File FileName="Assets\Scripts\Drawer\GUIDrawer.cs" Line="34" Column="3" />
+      <File FileName="Assets\Scripts\Main Menu\playGameSelecter.cs" Line="29" Column="3" />
+      <File FileName="Assets\Scripts\Units\cscript_turret.cs" Line="28" Column="1" />
+      <File FileName="Assets\Scripts\Units\cscript_player.cs" Line="181" Column="1" />
+      <File FileName="Assets\Scripts\Units\LightningBolt.cs" Line="58" Column="12" />
+      <File FileName="Assets\Scripts\Units\cscript_point.cs" Line="30" Column="4" />
+      <File FileName="Assets\Scripts\Units\cscript_unit.cs" Line="22" Column="2" />
+      <File FileName="Assets\Scripts\Units\cscript_master.cs" Line="31" Column="6" />
+      <File FileName="Assets\Scripts\Units\cscript_building.cs" Line="122" Column="64" />
+      <File FileName="Assets\Scripts\Main Menu\optionsSelect.cs" Line="36" Column="50" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
